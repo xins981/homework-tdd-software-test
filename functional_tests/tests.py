@@ -5,7 +5,7 @@ import time
 
 class NewVisitorTest(LiveServerTestCase):
 	def setUp(self):
-		[...]
+		self.browser = webdriver.Firefox()
 
 	def tearDown(self):
 		self.browser.quit()
@@ -27,7 +27,11 @@ class NewVisitorTest(LiveServerTestCase):
 		inputbox.send_keys(Keys.ENTER)
 		time.sleep(1)
 		
-		self.check_for_row_in_list_table('7: Buy peacock feathers')
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('Use peacock fethers to make a fly')
+		inputbox.send_keys(Keys.ENTER)
+		time.sleep(1)
+		self.check_for_row_in_list_table('1: Buy peacock feathers')
 		self.check_for_row_in_list_table('2: Use peacock fethers to make a fly')
 		
 		self.fail('Finish the test!')
