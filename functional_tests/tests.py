@@ -17,7 +17,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn(row_text, [row.text for row in rows])
 
     def wait_for_row_in_list_table(self, row_text):
-        MAX_WAIT = 8
+        MAX_WAIT = 10
         start_time = time.time()
         while True:
             try:
@@ -82,7 +82,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertRegex(francis_list_url, '/lists/.+')
         self.assertNotEqual(francis_list_url, edith_list_url)
     
-        page_text = self_browser.find_element_by_tag_name('body').text
+        page_text = self.browser.find_element_by_tag_name('body').text
         
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy mulk', page_text)
